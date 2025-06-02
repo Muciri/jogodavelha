@@ -1,4 +1,6 @@
-package jogodavelha;/*
+package jogodavelha;
+
+ /*
  * IFPB - TSI - POO - PROJETO1
  * Prof Fausto Ayres
  * Murilo Maciel Rodrigues
@@ -6,10 +8,7 @@ package jogodavelha;/*
  * classe JogoDaVelha
  */
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Random;
+import java.util.*;
 
 public class JogoDaVelha {
     //atributos
@@ -43,18 +42,39 @@ public class JogoDaVelha {
 
     //métodos
     public void jogaJogador(int numeroJogador, int posicao) throws Exception{ // valida a posição e efetiva a jogada para o jogador.
+        //verificação de posição inválida
         if (posicao < 0 || posicao > 8) {
             throw new Exception("Posição inválida. Escolha de 0 a 8.");
         }
-        this.celulas.set(posicao, this.simbolos[numeroJogador]);
+
+        //verificando se o espaço escolhido está disponível
+        if(Objects.equals(this.celulas.get(posicao), " ")){
+            this.celulas.set(posicao, this.simbolos[numeroJogador]); //adicionando a jogada do jogador no array
+            this.historico.put(posicao, this.simbolos[numeroJogador]); //adicionando a jogada do jogador no histórico
+        }
+        else {
+            throw new Exception("Posição já ocupada");
+        }
     } 
     
     public void jogaMaquina(){ // escolhe uma posição para a máquina.
         //TO INCREMENT
+
+        //máquina burra: escolhe qualquer posição aleatória para jogar
         if(this.esperteza == 1){
-            Random posicaoaleatoria = new Random();
-            this.celulas.set(posicaoaleatoria.nextInt(9), this.simbolos[1]);
+            Random aleatorio = new Random();
+            while(true){
+                int posicao = aleatorio.nextInt(9);
+
+                if(Objects.equals(this.celulas.get(posicao), " ")){ //verificando se o espaço escolhido está disponível
+                    this.celulas.set(posicao, this.simbolos[1]); //adicionando a jogada da máquina no array
+                    this.historico.put(posicao, this.simbolos[1]); //adicionando a jogada da máquina no histórico
+                    break;
+                }
+            }
         }
+
+        //máquina inteligente: escolhe a posição a partir de um algorítimo
         else {
             return;
             //TO DO
@@ -63,25 +83,25 @@ public class JogoDaVelha {
     
     public boolean terminou(){ // retorna true quando um jogador ganha ou não há mais células livres, e retorna false caso contrário.
         return !celulas.contains(" ") || this.getResultado() != -1;
-    } 
-    
+    }
+
     public int getResultado(){ // retorna //1(inexistente), 0(empate), 1(vitória do jogador1), 2(vitória do jogador2/máquina)
         //TO DO
-    } 
-    
+    }
+
     public String getSimbolo(int numeroJogador){ // retorna o símbolo do jogador
         return this.simbolos[numeroJogador];
-    } 
-    
+    }
+
     public String getFoto(){ // retorna um texto com as 9 posições (livres e ocupadas) do tabuleiro dispostas de forma bidimensional
-        //TO DO
-    } 
-    
+        return celulas.toString();
+    }
+
     public ArrayList<Integer> getPosicoesDisponiveis(){  // retorna uma lista com as posições ainda não utilizadas pelo jogo
         //TO DO
     }
-    
+
     public LinkedHashMap<Integer, String> getHistorico(){ // retorna pares <posição, símbolo> jogados durante o jogo
         //TO DO
-    } 
+    }
 }
