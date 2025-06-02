@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="POO - teste">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/AplicacaoJM.jar!/" />
+      <root url="jar://$PROJECT_DIR$/AplicacaoJJ.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
