@@ -161,10 +161,10 @@ public class JogoDaVelha {
             String valC = celulas.get(c);
 
             if (!valA.equals("-") && valA.equals(valB) && valB.equals(valC)) {
-                // Se o vencedor for o "x" retorna 1, se for "o" retorna 2
-                if (valA.equals("x")) {
+                // Se o símbolo vencedor for o primeiro retorna 1, se for o segundo retorna 2
+                if (valA.equals(this.simbolos[0])) {
                     return 1;
-                } else if (valA.equals("o") | valA.equals("m")) {
+                } else if (valA.equals(this.simbolos[1])) {
                     return 2;
                 }
             }
