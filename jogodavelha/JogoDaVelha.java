@@ -13,7 +13,7 @@ import java.util.*;
 public class JogoDaVelha {
     //atributos
     
-	ArrayList<String> celulas = new ArrayList<String>(); //Posições vencedoras: 012, 345, 678, 036, 147, 258, 048 e 246
+    ArrayList<String> celulas = new ArrayList<String>(); //Posições vencedoras: 012, 345, 678, 036, 147, 258, 048 e 246
     String[] simbolos = new String[2];
     LinkedHashMap<Integer, String> historico = new LinkedHashMap<Integer, String>();
     int quantidade_jogadas;
