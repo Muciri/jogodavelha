@@ -86,19 +86,17 @@ public class JogoDaVelha {
         //máquina inteligente: escolhe a posição a partir de um algorítimo
         else {
             String maquina = this.simbolos[1];
-            String jogador = this.simbolos[0];
 
-            // Verifica manualmente todas as 8 combinações vencedoras
-            if (tentaJogar(0, 1, 2, maquina, jogador)) return fazJogada(posVazio(0, 1, 2), maquina);
-            if (tentaJogar(3, 4, 5, maquina, jogador)) return fazJogada(posVazio(3, 4, 5), maquina);
-            if (tentaJogar(6, 7, 8, maquina, jogador)) return fazJogada(posVazio(6, 7, 8), maquina);
-            if (tentaJogar(0, 3, 6, maquina, jogador)) return fazJogada(posVazio(0, 3, 6), maquina);
-            if (tentaJogar(1, 4, 7, maquina, jogador)) return fazJogada(posVazio(1, 4, 7), maquina);
-            if (tentaJogar(2, 5, 8, maquina, jogador)) return fazJogada(posVazio(2, 5, 8), maquina);
-            if (tentaJogar(0, 4, 8, maquina, jogador)) return fazJogada(posVazio(0, 4, 8), maquina);
-            if (tentaJogar(2, 4, 6, maquina, jogador)) return fazJogada(posVazio(2, 4, 6), maquina);
+            if (podeJogar(0, 1, 2, maquina)) return fazJogada(posVazio(0, 1, 2), maquina);
+            if (podeJogar(3, 4, 5, maquina)) return fazJogada(posVazio(3, 4, 5), maquina);
+            if (podeJogar(6, 7, 8, maquina)) return fazJogada(posVazio(6, 7, 8), maquina);
+            if (podeJogar(0, 3, 6, maquina)) return fazJogada(posVazio(0, 3, 6), maquina);
+            if (podeJogar(1, 4, 7, maquina)) return fazJogada(posVazio(1, 4, 7), maquina);
+            if (podeJogar(2, 5, 8, maquina)) return fazJogada(posVazio(2, 5, 8), maquina);
+            if (podeJogar(0, 4, 8, maquina)) return fazJogada(posVazio(0, 4, 8), maquina);
+            if (podeJogar(2, 4, 6, maquina)) return fazJogada(posVazio(2, 4, 6), maquina);
 
-            // Joga na primeira posição livre
+            // Nenhuma jogada de vitória possível, joga na primeira livre
             for (int i = 0; i < 9; i++) {
                 if (this.celulas.get(i).equals("-")) {
                     return fazJogada(i, maquina);
@@ -108,10 +106,6 @@ public class JogoDaVelha {
             return 0; // Nenhuma jogada possível
         }
     }
-    
-    private boolean tentaJogar(int a, int b, int c, String maquina, String jogador) {
-            return podeJogar(a, b, c, maquina) || podeJogar(a, b, c, jogador);
-        }
 
     private boolean podeJogar(int a, int b, int c, String simbolo) {
             return (this.celulas.get(a).equals(simbolo) && this.celulas.get(b).equals(simbolo) && this.celulas.get(c).equals("-")) ||
