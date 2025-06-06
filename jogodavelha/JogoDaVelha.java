@@ -68,7 +68,7 @@ public class JogoDaVelha {
     public int jogaMaquina(){ 
     	
         //máquina burra: escolhe qualquer posição aleatória para jogar
-        if(this.esperteza == 1 | this.esperteza == 2){ //deixei esse "this.esperteza == 2" só pra testar, depois tem que tirar isso
+        if(this.esperteza == 1){
             Random aleatorio = new Random();
             while(true){
                 int posicao = aleatorio.nextInt(9);
