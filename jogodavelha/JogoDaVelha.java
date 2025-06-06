@@ -147,6 +147,10 @@ public class JogoDaVelha {
         if (verificarCombinacao(2, 5, 8)) return getVencedor(2);
         if (verificarCombinacao(0, 4, 8)) return getVencedor(0);
         if (verificarCombinacao(2, 4, 6)) return getVencedor(2);
+        
+        if (!celulas.contains("-")) {
+            return 0; // Empate
+        }
 
         return -1; // Nenhum vencedor
     }
