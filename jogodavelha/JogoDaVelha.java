@@ -88,88 +88,86 @@ public class JogoDaVelha {
             String maquina = this.simbolos[1];
             String jogador = this.simbolos[0];
 
-            int[][] combinacoes = {
-                {0, 1, 2}, {3, 4, 5}, {6, 7, 8}, // Linhas
-                {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, // Colunas
-                {0, 4, 8}, {2, 4, 6}             // Diagonais
-            };
-
-            // Tenta vencer ou bloquear
-            for (int[] c : combinacoes) {
-                int a = c[0], b = c[1], c_ = c[2];
-                if (podeJogar(a, b, c_, maquina)) return fazJogada(posVazio(a, b, c_), maquina);
-                if (podeJogar(a, b, c_, jogador)) return fazJogada(posVazio(a, b, c_), maquina);
-            }
+            // Verifica manualmente todas as 8 combinações vencedoras
+            if (tentaJogar(0, 1, 2, maquina, jogador)) return fazJogada(posVazio(0, 1, 2), maquina);
+            if (tentaJogar(3, 4, 5, maquina, jogador)) return fazJogada(posVazio(3, 4, 5), maquina);
+            if (tentaJogar(6, 7, 8, maquina, jogador)) return fazJogada(posVazio(6, 7, 8), maquina);
+            if (tentaJogar(0, 3, 6, maquina, jogador)) return fazJogada(posVazio(0, 3, 6), maquina);
+            if (tentaJogar(1, 4, 7, maquina, jogador)) return fazJogada(posVazio(1, 4, 7), maquina);
+            if (tentaJogar(2, 5, 8, maquina, jogador)) return fazJogada(posVazio(2, 5, 8), maquina);
+            if (tentaJogar(0, 4, 8, maquina, jogador)) return fazJogada(posVazio(0, 4, 8), maquina);
+            if (tentaJogar(2, 4, 6, maquina, jogador)) return fazJogada(posVazio(2, 4, 6), maquina);
 
             // Joga na primeira posição livre
             for (int i = 0; i < 9; i++) {
-                if (this.celulas.get(i).equals("-"))
+                if (this.celulas.get(i).equals("-")) {
                     return fazJogada(i, maquina);
+                }
             }
 
             return 0; // Nenhuma jogada possível
         }
     }
     
-    //método auxiliar para a máquina inteligente
-    private boolean podeJogar(int a, int b, int c, String simbolo) {
-        return this.celulas.get(a).equals(simbolo) && this.celulas.get(b).equals(simbolo) && this.celulas.get(c).equals("-") ||
-               this.celulas.get(a).equals(simbolo) && this.celulas.get(c).equals(simbolo) && this.celulas.get(b).equals("-") ||
-               this.celulas.get(b).equals(simbolo) && this.celulas.get(c).equals(simbolo) && this.celulas.get(a).equals("-");
-    }
-    
-    //método auxiliar para a máquina inteligente
-    private int posVazio(int a, int b, int c) {
-        if (this.celulas.get(a).equals("-")) return a;
-        if (this.celulas.get(b).equals("-")) return b;
-        return c;
-    }
+    private boolean tentaJogar(int a, int b, int c, String maquina, String jogador) {
+            return podeJogar(a, b, c, maquina) || podeJogar(a, b, c, jogador);
+        }
 
-    //método auxiliar para a máquina inteligente fazer a jogada
+    private boolean podeJogar(int a, int b, int c, String simbolo) {
+            return (this.celulas.get(a).equals(simbolo) && this.celulas.get(b).equals(simbolo) && this.celulas.get(c).equals("-")) ||
+                   (this.celulas.get(a).equals(simbolo) && this.celulas.get(c).equals(simbolo) && this.celulas.get(b).equals("-")) ||
+                   (this.celulas.get(b).equals(simbolo) && this.celulas.get(c).equals(simbolo) && this.celulas.get(a).equals("-"));
+        }
+
+    private int posVazio(int a, int b, int c) {
+            if (this.celulas.get(a).equals("-")) return a;
+            if (this.celulas.get(b).equals("-")) return b;
+            return c;
+        }
+
     private int fazJogada(int pos, String simbolo) {
-        this.celulas.set(pos, simbolo);
-        this.historico.put(pos, simbolo);
-        this.quantidade_jogadas++;
-        return pos;
-    }
+            this.celulas.set(pos, simbolo);
+            this.historico.put(pos, simbolo);
+            this.quantidade_jogadas++;
+            return pos;
+        }
 
     // retorna true quando um jogador ganha ou não há mais células livres, e retorna false caso contrário.
     public boolean terminou(){
         return !celulas.contains("-") || this.getResultado() != -1;
     }
 
-    // retorna //1(inexistente), 0(empate), 1(vitória do jogador1), 2(vitória do jogador2/máquina)
+    // retorna //-1(inexistente), 0(empate), 1(vitória do jogador1), 2(vitória do jogador2/máquina)
     public int getResultado() {
-        int[][] combinacoes = {
-            {0, 1, 2},
-            {3, 4, 5},
-            {6, 7, 8},
-            {0, 3, 6},
-            {1, 4, 7},
-            {2, 5, 8},
-            {0, 4, 8},
-            {2, 4, 6}
-        };
+        if (verificarCombinacao(0, 1, 2)) return getVencedor(0);
+        if (verificarCombinacao(3, 4, 5)) return getVencedor(3);
+        if (verificarCombinacao(6, 7, 8)) return getVencedor(6);
+        if (verificarCombinacao(0, 3, 6)) return getVencedor(0);
+        if (verificarCombinacao(1, 4, 7)) return getVencedor(1);
+        if (verificarCombinacao(2, 5, 8)) return getVencedor(2);
+        if (verificarCombinacao(0, 4, 8)) return getVencedor(0);
+        if (verificarCombinacao(2, 4, 6)) return getVencedor(2);
 
-        for (int[] combinacao : combinacoes) {
-            int a = combinacao[0];
-            int b = combinacao[1];
-            int c = combinacao[2];
-
-            String valA = celulas.get(a);
-            String valB = celulas.get(b);
-            String valC = celulas.get(c);
-
-            if (!valA.equals("-") && valA.equals(valB) && valB.equals(valC)) {
-                // Se o símbolo vencedor for o primeiro retorna 1, se for o segundo retorna 2
-                if (valA.equals(this.simbolos[0])) {
-                    return 1;
-                } else if (valA.equals(this.simbolos[1])) {
-                    return 2;
-                }
-            }
-        }
         return -1; // Nenhum vencedor
+    }
+
+    // Função auxiliar para verificar se três posições são iguais e não vazias
+    private boolean verificarCombinacao(int a, int b, int c) {
+        String valA = celulas.get(a);
+        String valB = celulas.get(b);
+        String valC = celulas.get(c);
+        return !valA.equals("-") && valA.equals(valB) && valB.equals(valC);
+    }
+
+    // Função auxiliar para determinar o vencedor baseado no índice
+    private int getVencedor(int index) {
+        String valor = celulas.get(index);
+        if (valor.equals(this.simbolos[0])) {
+            return 1;
+        } else if (valor.equals(this.simbolos[1])) {
+            return 2;
+        }
+        return -1;
     }
 
     // retorna o símbolo do jogador
