@@ -185,7 +185,7 @@ public class TelaJogo {
 		for (int i = 0; i < 9; i++) {
 			int x = i % 3;
 			int y = i / 3;
-			grid[x][y].setText(jogo.celulas.get(i));
+			grid[x][y].setText(jogo.getCelula(i));
 		}
 	}
 

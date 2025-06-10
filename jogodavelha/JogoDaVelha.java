@@ -13,11 +13,11 @@ import java.util.*;
 public class JogoDaVelha {
     //atributos
     
-    ArrayList<String> celulas = new ArrayList<String>(); //Posições vencedoras: 012, 345, 678, 036, 147, 258, 048 e 246
-    String[] simbolos = new String[2];
-    LinkedHashMap<Integer, String> historico = new LinkedHashMap<Integer, String>();
-    int quantidade_jogadas;
-    int esperteza;
+    private ArrayList<String> celulas = new ArrayList<String>(); //Posições vencedoras: 012, 345, 678, 036, 147, 258, 048 e 246
+    private String[] simbolos = new String[2];
+    private LinkedHashMap<Integer, String> historico = new LinkedHashMap<Integer, String>();
+    private int quantidade_jogadas;
+    private int esperteza;
 
     //construtores
     
@@ -211,5 +211,10 @@ public class JogoDaVelha {
     //método get para o total de jogadas
     public int getTotalJogadas(){
         return this.quantidade_jogadas;
+    }
+
+    //método get para obter o valor de uma célula
+    public String getCelula(int i){
+        return this.celulas.get(i);
     }
 }
