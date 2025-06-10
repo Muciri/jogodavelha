@@ -1,5 +1,10 @@
 package jogodavelha;
 
+/*
+ * IFPB - TSI - POO - PROJETO1 - classe TelaJogo
+ * Prof: Fausto Ayres - Alunos: Murilo Maciel Rodrigues e Felipe Oliveira Raimundo
+ */
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
@@ -9,7 +14,6 @@ import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 public class TelaJogo {
-
 	private JFrame frmJogoDaVelha;
 	private JLabel[][] grid;
 	private JogoDaVelha jogo;
@@ -18,6 +22,7 @@ public class TelaJogo {
 	private JTextArea areaHistorico;
 	private JLabel lblJogadas;
 	private JLabel lblResultado;
+	private JLabel lblPosicoesDisponiveis;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
@@ -87,6 +92,7 @@ public class TelaJogo {
 				atualizarTabuleiro();
 				lblJogadas.setText("Jogadas: 0");
 				lblResultado.setText("Resultado:");
+				lblPosicoesDisponiveis.setText("posições disponíveis" + jogo.getPosicoesDisponiveis());
 			}
 		});
 		btniniciar.setBounds(0, 0, 89, 23);
@@ -116,6 +122,10 @@ public class TelaJogo {
 		lblResultado = new JLabel("Resultado:");
 		lblResultado.setBounds(43, 298, 200, 14);
 		frmJogoDaVelha.getContentPane().add(lblResultado);
+
+		lblPosicoesDisponiveis = new JLabel("Posições disponiveis:");
+		lblPosicoesDisponiveis.setBounds(43, 325, 250, 14);
+		frmJogoDaVelha.getContentPane().add(lblPosicoesDisponiveis);
 
 		// Painel da grade
 		GridLayout layout = new GridLayout(3, 3, 1, 1);
@@ -165,14 +175,15 @@ public class TelaJogo {
 				int r = jogo.getResultado();
 				String msg = switch (r) {
 					case 0 -> "Empate!";
-					case 1 -> "Jogador 1 venceu!";
-					case 2 -> modoContraMaquina ? "Máquina venceu!" : "Jogador 2 venceu!";
+					case 1 -> "Jogador " + jogo.getSimbolo(1) + " venceu!";
+					case 2 -> modoContraMaquina ? "Máquina venceu!" : "Jogador " + jogo.getSimbolo(2) + " venceu!";
 					default -> "Erro ao verificar resultado.";
 				};
 				lblResultado.setText("Resultado: " + msg);
 			}
 
 			lblJogadas.setText("Jogadas: " + jogo.getTotalJogadas());
+			lblPosicoesDisponiveis.setText("posições disponíveis" + jogo.getPosicoesDisponiveis());
 			atualizarHistorico();
 
 		} catch (Exception ex) {
