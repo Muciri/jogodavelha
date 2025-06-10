@@ -1,10 +1,4 @@
-/.classpath
-/.idea/
-/.project
-/AplicacaoJJ.class
-/AplicacaoJJ.jar
-/AplicacaoJM.class
-/AplicacaoJM.jar
-/POO - teste.iml
 /jogodavelha/
 /out/
+/.settings/
+/.idea/
