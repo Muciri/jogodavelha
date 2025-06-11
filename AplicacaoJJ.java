@@ -12,7 +12,7 @@ public class AplicacaoJJ {
 	private JogoDaVelha jogodavelha;
 
 	public AplicacaoJJ() {
-		jogodavelha = new JogoDaVelha("x", "o"); // jogador1=x, jogador2=o
+		jogodavelha = new JogoDaVelha("x", "x"); // jogador1=x, jogador2=o
 
 		int ordem = 0;
 		do {

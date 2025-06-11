@@ -12,7 +12,7 @@ public class AplicacaoJM {
 	private JogoDaVelha jogodavelha;
 
 	public AplicacaoJM() {
-		jogodavelha = new JogoDaVelha("x", 2); // jogador=x, nivel da maquina=1(baixo) ou 2(alto)
+		jogodavelha = new JogoDaVelha("x", 1); // jogador=x, nivel da maquina=1(baixo) ou 2(alto)
 	
 		int ordem=0;
 		do {

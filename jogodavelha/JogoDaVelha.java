@@ -48,7 +48,7 @@ public class JogoDaVelha {
 
     // valida a posição e efetiva a jogada para o jogador.
     public void jogaJogador(int numeroJogador, int posicao) throws Exception{
-        //verificação de posição inválida
+       //verificação de posição inválida
         if (posicao < 0 || posicao > 8) {
             throw new Exception("Posição inválida. Escolha de 0 a 8.");
         }

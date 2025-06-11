@@ -1,5 +1,14 @@
 package jogodavelha;
 
+/*
+* IFPB - TSI - POO - PROJETO1
+* Prof Fausto Ayres
+* Murilo Maciel Rodrigues
+* Felipe Oliveira Raimundo
+* classe TelaJogo
+*/
+
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
@@ -18,6 +27,12 @@ public class TelaJogo {
 	private JLabel lblJogadas;
 	private JLabel lblResultado;
 	private JLabel lblPosicoesDisponiveis;
+	private JRadioButton rdbtnJogador1;
+	private JRadioButton rdbtnJogador2;
+	private JComboBox<String> comboBox_1;
+	private JComboBox<String> comboBox_2;
+	private JComboBox<String> comboBox;
+	private JButton btniniciar;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
@@ -44,24 +59,24 @@ public class TelaJogo {
 		frmJogoDaVelha.setIconImage(icon.getImage());
 
 		String[] simbolo = {"X", "O"};
-		JComboBox<String> comboBox_1 = new JComboBox<>(simbolo);
+		comboBox_1 = new JComboBox<>(simbolo);
 		comboBox_1.setBounds(169, 25, 44, 23);
 		frmJogoDaVelha.getContentPane().add(comboBox_1);
 
-		JComboBox<String> comboBox_2 = new JComboBox<>(simbolo);
+		comboBox_2 = new JComboBox<>(simbolo);
 		comboBox_2.setBounds(169, 49, 44, 22);
 		frmJogoDaVelha.getContentPane().add(comboBox_2);
 
 		String[] opcao = {"1", "2"};
-		JComboBox<String> comboBox = new JComboBox<>(opcao);
+		comboBox = new JComboBox<>(opcao);
 		comboBox.setBounds(376, 21, 44, 22);
 		frmJogoDaVelha.getContentPane().add(comboBox);
 
-		JRadioButton rdbtnJogador1 = new JRadioButton("Jogador x Jogador");
+		rdbtnJogador1 = new JRadioButton("Jogador x Jogador");
 		rdbtnJogador1.setBounds(91, 0, 144, 23);
 		frmJogoDaVelha.getContentPane().add(rdbtnJogador1);
 
-		JRadioButton rdbtnJogador2 = new JRadioButton("Jogador x Máquina");
+		rdbtnJogador2 = new JRadioButton("Jogador x Máquina");
 		rdbtnJogador2.setBounds(237, 0, 133, 23);
 		frmJogoDaVelha.getContentPane().add(rdbtnJogador2);
 
@@ -70,7 +85,7 @@ public class TelaJogo {
 		group.add(rdbtnJogador2);
 		rdbtnJogador1.setSelected(true);
 
-		JButton btniniciar = new JButton("Iniciar");
+		btniniciar = new JButton("Iniciar");
 		btniniciar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String simbolo1 = (String) comboBox_1.getSelectedItem();
@@ -136,14 +151,15 @@ public class TelaJogo {
 		lblPosicoesDisponiveis.setBounds(43, 325, 250, 14);
 		frmJogoDaVelha.getContentPane().add(lblPosicoesDisponiveis);
 
+		JLabel lblNewLabel = new JLabel("Nivel");
+		lblNewLabel.setBounds(384, 4, 56, 14);
+		frmJogoDaVelha.getContentPane().add(lblNewLabel);
+
 		GridLayout layout = new GridLayout(3, 3, 1, 1);
 		JPanel painelGrid = new JPanel(layout);
 		painelGrid.setBounds(143, 99, 130, 130);
 		frmJogoDaVelha.getContentPane().add(painelGrid);
 		
-		JLabel lblNewLabel = new JLabel("Nivel");
-		lblNewLabel.setBounds(384, 4, 56, 14);
-		frmJogoDaVelha.getContentPane().add(lblNewLabel);
 
 		grid = new JLabel[3][3];
 		for (int i = 0; i < 9; i++) {
@@ -192,7 +208,6 @@ public class TelaJogo {
 					default -> "Erro ao verificar resultado.";
 				};
 				lblResultado.setText("Resultado: " + msg);
-			
 				
 			}
 
