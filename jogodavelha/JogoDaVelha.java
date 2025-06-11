@@ -138,20 +138,20 @@ public class JogoDaVelha {
             return (this.celulas.get(a).equals(simbolo) && this.celulas.get(b).equals(simbolo) && this.celulas.get(c).equals("-")) ||
                    (this.celulas.get(a).equals(simbolo) && this.celulas.get(c).equals(simbolo) && this.celulas.get(b).equals("-")) ||
                    (this.celulas.get(b).equals(simbolo) && this.celulas.get(c).equals(simbolo) && this.celulas.get(a).equals("-"));
-        }
+    }
 
     private int posVazio(int a, int b, int c) {
             if (this.celulas.get(a).equals("-")) return a;
             if (this.celulas.get(b).equals("-")) return b;
             return c;
-        }
+    }
 
     private int fazJogada(int pos, String simbolo) {
             this.celulas.set(pos, simbolo);
             this.historico.put(pos, simbolo);
             this.quantidade_jogadas++;
             return pos;
-        }
+    }
 
     // retorna true quando um jogador ganha ou não há mais células livres, e retorna false caso contrário.
     public boolean terminou(){
@@ -238,10 +238,5 @@ public class JogoDaVelha {
     //método get para o total de jogadas
     public int getTotalJogadas(){
         return this.quantidade_jogadas;
-    }
-
-    //método get para obter o valor de uma célula
-    public String getCelula(int i){
-        return this.celulas.get(i);
     }
 }

@@ -55,8 +55,8 @@ public class TelaJogo {
 		frmJogoDaVelha.setBounds(470, 150, 483, 406);
 		frmJogoDaVelha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmJogoDaVelha.getContentPane().setLayout(null);
-		ImageIcon icon = new ImageIcon(TelaJogo.class.getResource("/imagens/icon.png"));
-		frmJogoDaVelha.setIconImage(icon.getImage());
+		//ImageIcon icon = new ImageIcon(TelaJogo.class.getResource("/imagens/icon.png"));
+		//frmJogoDaVelha.setIconImage(icon.getImage());
 
 		String[] simbolo = {"X", "O"};
 		comboBox_1 = new JComboBox<>(simbolo);
@@ -222,10 +222,14 @@ public class TelaJogo {
 
 	private void atualizarTabuleiro() {
 		if (jogo == null) return;
-		for (int i = 0; i < 9; i++) {
+
+		String tabuleiro = jogo.getFoto();
+		String[] valores = tabuleiro.trim().split("\\s+");
+
+		for (int i = 0; i < 9 && i < valores.length; i++) {
 			int x = i % 3;
 			int y = i / 3;
-			grid[x][y].setText(jogo.getCelula(i));
+			grid[x][y].setText(valores[i]);
 		}
 	}
 
