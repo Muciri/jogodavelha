@@ -1,0 +1,56 @@
+# Arquivos e pastas do Eclipse
+/.classpath
+/.project
+/.settings/
+
+# Arquivos e pastas do IntelliJ IDEA
+/.idea/
+/*.iml
+/out/
+
+# Diretórios de build (geralmente usados por Maven, Gradle, Ant)
+/target/
+/bin/
+/build/
+
+# Arquivos compilados Java
+*.class
+
+# Arquivos temporários e de log
+*.log
+*.tmp
+*.temp
+
+# Arquivos gerados por sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos do Maven Wrapper
+.mvn/wrapper/maven-wrapper.jar
+
+# Diretórios do Gradle
+.gradle/
+/build/
+
+# Arquivos de lock
+*.lock
+
+# Diretórios do sistema operacional
+# Windows
+ehthumbs.db
+Desktop.ini
+
+# Mac
+.AppleDouble
+.LSOverride
+
+# Arquivos do sistema Linux
+*~
+
+# Outros arquivos que podem ser gerados por IDEs ou plugins
+.settings/
+
+# Arquivos de backup e arquivos temporários de editores
+*~
+*.swp
+*.swo

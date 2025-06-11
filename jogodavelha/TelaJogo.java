@@ -37,7 +37,7 @@ public class TelaJogo {
 	private void initialize() {
 		frmJogoDaVelha = new JFrame();
 		frmJogoDaVelha.setTitle("Jogo da Velha");
-		frmJogoDaVelha.setBounds(470, 150, 454, 406);
+		frmJogoDaVelha.setBounds(470, 150, 483, 406);
 		frmJogoDaVelha.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmJogoDaVelha.getContentPane().setLayout(null);
 		ImageIcon icon = new ImageIcon(TelaJogo.class.getResource("/imagens/icon.png"));
@@ -54,7 +54,7 @@ public class TelaJogo {
 
 		String[] opcao = {"1", "2"};
 		JComboBox<String> comboBox = new JComboBox<>(opcao);
-		comboBox.setBounds(374, 0, 44, 22);
+		comboBox.setBounds(376, 21, 44, 22);
 		frmJogoDaVelha.getContentPane().add(comboBox);
 
 		JRadioButton rdbtnJogador1 = new JRadioButton("Jogador x Jogador");
@@ -85,12 +85,14 @@ public class TelaJogo {
 		            return; // para não iniciar o jogo
 		        }
 		        
-		        
-		        
+		   
 				if (modoContraMaquina) {
 					jogo = new JogoDaVelha(simbolo1, nivel);
+					
+					
 				} else {
 					jogo = new JogoDaVelha(simbolo1, simbolo2);
+					
 				}
 
 				vezJogador1 = true;
@@ -99,6 +101,7 @@ public class TelaJogo {
 				lblJogadas.setText("Jogadas: 0");
 				lblResultado.setText("Resultado:");
 				lblPosicoesDisponiveis.setText("Posições disponíveis: " + jogo.getPosicoesDisponiveis());
+		
 			}
 		});
 		btniniciar.setBounds(0, 0, 89, 23);
@@ -137,6 +140,10 @@ public class TelaJogo {
 		JPanel painelGrid = new JPanel(layout);
 		painelGrid.setBounds(143, 99, 130, 130);
 		frmJogoDaVelha.getContentPane().add(painelGrid);
+		
+		JLabel lblNewLabel = new JLabel("Nivel");
+		lblNewLabel.setBounds(384, 4, 56, 14);
+		frmJogoDaVelha.getContentPane().add(lblNewLabel);
 
 		grid = new JLabel[3][3];
 		for (int i = 0; i < 9; i++) {
@@ -185,6 +192,8 @@ public class TelaJogo {
 					default -> "Erro ao verificar resultado.";
 				};
 				lblResultado.setText("Resultado: " + msg);
+			
+				
 			}
 
 			lblJogadas.setText("Jogadas: " + jogo.getTotalJogadas());
