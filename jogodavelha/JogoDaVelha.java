@@ -86,7 +86,9 @@ public class JogoDaVelha {
         //máquina inteligente: escolhe a posição a partir de um algorítimo
         else {
             String maquina = this.simbolos[1];
-
+            String jogador = this.simbolos[0];
+            
+            //1. Tentar ganhar
             if (podeJogar(0, 1, 2, maquina)) return fazJogada(posVazio(0, 1, 2), maquina);
             if (podeJogar(3, 4, 5, maquina)) return fazJogada(posVazio(3, 4, 5), maquina);
             if (podeJogar(6, 7, 8, maquina)) return fazJogada(posVazio(6, 7, 8), maquina);
@@ -95,12 +97,37 @@ public class JogoDaVelha {
             if (podeJogar(2, 5, 8, maquina)) return fazJogada(posVazio(2, 5, 8), maquina);
             if (podeJogar(0, 4, 8, maquina)) return fazJogada(posVazio(0, 4, 8), maquina);
             if (podeJogar(2, 4, 6, maquina)) return fazJogada(posVazio(2, 4, 6), maquina);
+            
 
-            // Nenhuma jogada de vitória possível, joga na primeira livre
+            // 2. Bloquear o jogador
+            if (podeJogar(0, 1, 2, jogador)) return fazJogada(posVazio(0, 1, 2), maquina);
+            if (podeJogar(3, 4, 5, jogador)) return fazJogada(posVazio(3, 4, 5), maquina);
+            if (podeJogar(6, 7, 8, jogador)) return fazJogada(posVazio(6, 7, 8), maquina);
+            if (podeJogar(0, 3, 6, jogador)) return fazJogada(posVazio(0, 3, 6), maquina);
+            if (podeJogar(1, 4, 7, jogador)) return fazJogada(posVazio(1, 4, 7), maquina);
+            if (podeJogar(2, 5, 8, jogador)) return fazJogada(posVazio(2, 5, 8), maquina);
+            if (podeJogar(0, 4, 8, jogador)) return fazJogada(posVazio(0, 4, 8), maquina);
+            if (podeJogar(2, 4, 6, jogador)) return fazJogada(posVazio(2, 4, 6), maquina);
+            
+
+            // 3. Centro
+            if (this.celulas.get(4).equals("-")) return fazJogada(4, maquina);
+
+            // 4. Canto
+            int[] cantos = {0, 2, 6, 8};
+            for (int canto : cantos) {
+                if (this.celulas.get(canto).equals("-")) return fazJogada(canto, maquina);
+            }
+
+            // 5. Lateral
+            int[] laterais = {1, 3, 5, 7};
+            for (int lateral : laterais) {
+                if (this.celulas.get(lateral).equals("-")) return fazJogada(lateral, maquina);
+            }
+
+            // 6. Fallback (último recurso)
             for (int i = 0; i < 9; i++) {
-                if (this.celulas.get(i).equals("-")) {
-                    return fazJogada(i, maquina);
-                }
+                if (this.celulas.get(i).equals("-")) return fazJogada(i, maquina);
             }
 
             return 0; // Nenhuma jogada possível
